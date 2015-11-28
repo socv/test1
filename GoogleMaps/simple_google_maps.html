@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head>
+<style type="text/css">
+html, body, #map { height: 100%; width: 100%; margin: 0; padding: 0; }
+</style>
+<script src="https://maps.google.com/maps/api/js?v=3&amp;sensor=false" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript"><!--
+var map;
+function init_google_maps() {
+  google.maps.controlStyle = 'azteca';
+  var opts = { zoom: 4, center: {lat:35.680725,lng:139.767293} };
+  map = new google.maps.Map(document.getElementById('map'), opts);
+  if(!map) { alert("!map"); }
+  map.addListener('click', function(event) { map.panTo(event.latLng); } );
+  map.addListener('dblclick', function(event) { map.panTo(event.latLng);  } );
+  map.addListener('zoom_changed', on_changed_func);
+  map.addListener('center_changed', on_changed_func);
+  var re_latlng = /^\#? *([-+]?[0-9]+(?:\.[0-9]*)) *, *([-+]?[0-9]+(?:\.[0-9]*)) *, *([0-9]+) */;
+  var match = re_latlng.exec(location.hash);
+  if(match) go_to(match[1], match[2], match[3]);
+  else {
+    if(!navigator.geolocation) alert("Geolocationが使えません");
+    else {
+      navigator.geolocation.getCurrentPosition(
+        function(pos) { go_to(pos.coords.latitude, pos.coords.longitude, 15); },
+        function(error) {
+          switch(error.code) {
+            case error.POSTION_UNAVAILABLE: alert("位置情報取得が不可能"); break;
+            case error.PERMISSINO_DENIED: alert("位置情報取得が不許可"); break;
+            case error.PERMISSION_DENIED_TIMEOUT: alert("位置情報取得タイムアウト"); break;
+            default:alert("よくわからないエラーです");
+          }
+        }
+      )
+    }
+  }
+}
+function go_to(lat, lng, zoom) {
+map.panTo(new google.maps.LatLng(lat, lng));
+map.setZoom(Number(zoom));
+}
+function on_changed_func() {
+  location.hash = "#" + map.getCenter().lat() + "," + map.getCenter().lng() + "," + map.getZoom()
+}
+//--></script>
+</head>
+<body onLoad="init_google_maps();"><div id="map"></div></body>
+</html>
