@@ -1,0 +1,21 @@
+@-moz-document domain("twitter.com") {
+  body.ja { font-family: sans-serif; }
+  .TweetTextSize { font-size: 11pt; line-height: 1.2em; }
+}
+@-moz-document domain("twitter.com") {
+  .dashboard-right { display: none; }
+  .dashboard-left { display: none; }
+  .Trends { display: none; }
+  .roaming-module { display: none; }
+
+  body.three-col .content-main { width: 100%; margin-left: 0px; position: relative; left: 0; top 0; }
+  body.three-col .wrapper { width: auto; }
+  .account, .tweet, .app { padding: 2px 12px; }
+  .ProfileTweet-actionList { margin-top: 0px; margin-bottom: 0px; }
+  .stream .stream-item-footer { position: absolute; margin: 0 0 0 auto; right:0; top: 0; display: table; width: 400px; }
+  .avatar, .conversation-module .conversation-tweet-item .stream-item-header .avatar { border-radius: 1px; height: 36px; width: 36px; }
+  .account, .tweet, .app { min-height: 0px; }
+
+  a.tweet-timestamp:before, a.ProfileTweet-timestamp:before { content: attr(title)attr(data-original-title); }
+  span._timestamp { display: none; }
+}
