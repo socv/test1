@@ -9,9 +9,8 @@
 
 @-moz-document domain("twitter.com") {
   body.ja { font-family: sans-serif; }
-  .TweetTextSize { font-size: 11pt; line-height: 1.2em; }
-}
-@-moz-document domain("twitter.com") {
+  .TweetTextSize { font-size: 12pt; line-height: 1.2em; }
+
   .dashboard-right { display: none; }
   .dashboard-left { display: none; }
   .Trends { display: none; }
