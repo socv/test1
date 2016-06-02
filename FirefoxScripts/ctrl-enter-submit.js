@@ -1,20 +1,30 @@
 // ==UserScript==
 // @name        ctrl-enter submit
 // @namespace   socv
-// @version     1
+// @version     2
 // @grant       none
 // ==/UserScript==
+// allow pasting
 document.onkeydown = function (e) {
   if (e.ctrlKey && e.keyCode == 13) {
     for (e = document.activeElement; e; e = e.parentElement) {
       if (e.tagName == 'FORM') {
-        if (typeof (e.submit) == 'function') e.submit();
-        else e.submit.click();
-        break;
+        var inputs = e.getElementsByTagName('input');
+        for(var i = 0; i < inputs.length; ++i) {
+          var s = inputs[i];
+          if(s.type == 'submit') {
+            s.click();
+            return;
+          }
+        }
+        alert("submit not found");
+        return;
       }
     }
+    alert("form not found");
   }
 }
+
 // Firefox のユーザースクリプト管理アドオン "Greasemonkey" https://addons.mozilla.org/ja/firefox/addon/greasemonkey/
 // 経由で使うユーザースクリプト。
 // Ctrl-Enter を押すと、カーソルがあるアクティブな要素を抱えるフォームのsubmitが押されたことになる。
