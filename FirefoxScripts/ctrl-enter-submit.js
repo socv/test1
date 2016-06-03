@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        ctrl-enter submit
-// @namespace   socv
-// @version     2
+// @namespace   https://github.com/socv/test1
+// @version     0.20160603.0
 // @grant       none
 // ==/UserScript==
 // allow pasting
